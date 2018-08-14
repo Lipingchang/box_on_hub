@@ -1,4 +1,6 @@
 var mosca = require('mosca');
+var StringDecoder = require('string_decoder').StringDecoder;
+var decoder = new StringDecoder('utf-8');
 
 var ascoltatore = {
   //using ascoltatore
@@ -16,12 +18,12 @@ var settings = {
 var server = new mosca.Server(settings);
 
 server.on('clientConnected', function(client) {
-    console.log('client connected', client.id);
+    console.log('client connected,client id:', client.id);
 });
 
 // fired when a message is received
 server.on('published', function(packet, client) {
-  console.log('Published', packet.payload);
+  console.log('Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload)));
 });
 
 server.on('ready', setup);
