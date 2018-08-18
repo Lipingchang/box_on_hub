@@ -29,7 +29,7 @@ server.on('published', function(packet, client) {
   console.log(' Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload))); // packet.payload.toString()
   if(saving_one == packet.topic){
     console.log('start saving ~~')
-    saveMessageToDB(packet.payload.toString);
+    saveMessageToDB(packet.payload.toString());
   }
 });
 
