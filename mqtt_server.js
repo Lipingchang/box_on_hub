@@ -23,7 +23,7 @@ server.on('clientConnected', function(client) {
 
 // fired when a message is received
 server.on('published', function(packet, client) {
-  console.log(client.id , ' Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload)));
+  console.log(' Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload)));
 });
 
 server.on('ready', setup);
