@@ -5,7 +5,7 @@ var decoder = new StringDecoder('utf-8');
 // 原来的数据库的名字是: ascoltatori',
 var mongodbSetting = {
   type:'mongo',
-  url:'mongodb://10.66.4.189:2017/mqtt',
+  url:'mongodb://10.66.4.189:27017/mqtt',
   pubsubCollection:"mqtt_sub_pub_log",
   mongo:{}
 }
