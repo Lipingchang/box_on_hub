@@ -77,28 +77,28 @@ client.on('message', function (topic, message) {
 // 	});
 // 	// todo 把上面的改成promise的.
 // });
-app.get('/fan1_state',function (req,res,ne) {
-	client.publish(send_cmd_topic,'fan1_state',function (err) {
-		if(err){
-			res.send('fail..');
-		}else{
-			res.send({"mqttsendtime:":parseInt(Date.parse(new Date())/1000)});
-		}
-	})
-});
-app.get('/sprayer1_state',function(req,res,next){
-	client.publish(send_cmd_topic,"sprayer1_state",function (err) {
-		if(err){
-			res.send('faill..');
-		}else{
-			res.send({"mqttsendtime":parseInt(Date.parse(new Date())/1000)});
-		}
-	})
-});
-app.get("/now_buff",function(req,res,next){
+// app.get('/fan1_state',function (req,res,ne) {
+// 	client.publish(send_cmd_topic,'fan1_state',function (err) {
+// 		if(err){
+// 			res.send('fail..');
+// 		}else{
+// 			res.send({"mqttsendtime:":parseInt(Date.parse(new Date())/1000)});
+// 		}
+// 	})
+// });
+// app.get('/sprayer1_state',function(req,res,next){
+// 	client.publish(send_cmd_topic,"sprayer1_state",function (err) {
+// 		if(err){
+// 			res.send('faill..');
+// 		}else{
+// 			res.send({"mqttsendtime":parseInt(Date.parse(new Date())/1000)});
+// 		}
+// 	})
+// });
+app.get("/state_buff",function(req,res,next){
 	res.send(state_buff);
 });
-app.get("/daily_temp",function(req,res,next){
+app.get("/daily_buff",function(req,res,next){
 	res.send(daily_temp_buff);
 });
 app.get("/sendcmd",function(req,res,next){   // http://localhost:12138/sendcmd?cmd=hhh
@@ -109,7 +109,7 @@ app.get("/sendcmd",function(req,res,next){   // http://localhost:12138/sendcmd?c
 			res.send({'yourcmd:':req.query.cmd,ok:true});
 		}
 	})
-})
+});
 app.listen(12138, function() {
  console.log('App listening at port 12138;');
 });
