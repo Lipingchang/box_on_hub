@@ -26,7 +26,8 @@ client.on('connect',function(){
 	client.subscribe(daily_temp_topic,0,function(err,granted){
 		console.log('granted:topic ',granted[0].topic);
 	})
-})
+});
+
 // 收到消息的处理:
 client.on('message', function (topic, message) {
   // message is Buffer
@@ -98,7 +99,7 @@ app.get("/now_buff",function(req,res,next){
 });
 app.get("/daily_temp",function(req,res,next){
 	res.send(daily_temp_buff.info);
-})
+});
 app.listen(12138, function() {
  console.log('App listening at port 12138;');
 });
