@@ -31,7 +31,7 @@ client.on('connect',function(){
 // 收到消息的处理:
 client.on('message', function (topic, message) {
   // message is Buffer
-  console.log( 'get message:topic:',topic,' message:',message.toString());
+  //console.log( 'get message:topic:',topic,' message:',message.toString());
   // 当topic时当前监听的state:
   if(topic == state_return_topic){
   	// 分离出设备名字和状态(0/1)
@@ -48,8 +48,9 @@ client.on('message', function (topic, message) {
   	}
   }
   if(topic == daily_temp_topic ){
-  	console.log('modifiy daily_temp...');
-  	daily_temp_buff.info = message.toString();
+  	console.log('update daily_temp...');
+  	daily_temp_buff.info = JSON.parse(message.toString());
+  	daily_temp_buff.timestamp = parseInt(Date.parse(new Date())/1000);
   }
 });
 
@@ -98,8 +99,17 @@ app.get("/now_buff",function(req,res,next){
 	res.send(state_buff);
 });
 app.get("/daily_temp",function(req,res,next){
-	res.send(daily_temp_buff.info);
+	res.send(daily_temp_buff);
 });
+app.get("/sendcmd",function(req,res,next){   // http://localhost:12138/sendcmd?cmd=hhh
+	client.publish(send_cmd_topic,req.query.cmd,function(err){
+		if(err){
+			res.send('faill');
+		}else{
+			res.send({'yourcmd:':req.query.cmd,ok:true});
+		}
+	})
+})
 app.listen(12138, function() {
  console.log('App listening at port 12138;');
 });
