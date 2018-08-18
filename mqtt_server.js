@@ -22,21 +22,25 @@ server.on('clientConnected', function(client) {
 });
 
 
-// 要保存的数据的topic:
+// 要另外保存的数据的topic:
 saving_one = "daily1";
 // fired when a message is received
 server.on('published', function(packet, client) {
-  console.log(' Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload))); // packet.payload.toString()
+  console.log('Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload))); // packet.payload.toString()
+  // 另外保存:
   if(saving_one == packet.topic){
     console.log('start saving ~~')
     saveMessageToDB(packet.payload.toString());
   }
 });
 
-//  ===============================================================================================
+
+// 另外保存 数据的mongodb的客户端: ===============================================================================================
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://10.66.4.189:27017/mqtt";
 var collection_handle = null;
+
+// 链接数据库,然后取出链接好的 collection:
 MongoClient.connect(url, function(err, db) {
   if(err){
     console.log('connect to mqtt db fail!!');
@@ -46,21 +50,23 @@ MongoClient.connect(url, function(err, db) {
     collection_handle = db.collection(saving_one); 
   }
 });
+// 把传入的字符串 解析成json,然后加上时间标签,保存到数据库中.
 function saveMessageToDB(save_str){
   json = JSON.parse(save_str);
-  console.log(json);
   json.timestamp = parseInt(Date.parse(new Date())/1000);
   collection_handle.insert(json,function(err,result){
-    console.log('err:',err," result:",result);
+    if( err ){
+      console.log("err:",err);
+    }
   });
 }
 
-server.on('ready', setup);
-
-// fired when the mqtt server is ready
-function setup() {
+server.on('ready', function(){
   console.log('Mosca server is up and running');
-}
+
+});
+
+
 //https://www.npmjs.com/package/mqtt
 //https://github.com/mcollina/mosca
 //https://segmentfault.com/a/1190000009536199
