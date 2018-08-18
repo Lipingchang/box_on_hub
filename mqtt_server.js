@@ -26,10 +26,9 @@ server.on('clientConnected', function(client) {
 saving_one = "daily1";
 // fired when a message is received
 server.on('published', function(packet, client) {
-  console.log('Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload))); // packet.payload.toString()
+  //console.log('Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload))); // packet.payload.toString()
   // 另外保存:
   if(saving_one == packet.topic){
-    console.log('start saving ~~')
     saveMessageToDB(packet.payload.toString());
   }
 });
