@@ -23,7 +23,7 @@ server.on('clientConnected', function(client) {
 
 
 // 要保存的数据的topic:
-saving_one = "daily_1";
+saving_one = "daily1";
 // fired when a message is received
 server.on('published', function(packet, client) {
   console.log(' Published topic:', packet.topic,' payload:',decoder.write(Buffer.from(packet.payload))); // packet.payload.toString()
