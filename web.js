@@ -106,7 +106,7 @@ app.get("/sendcmd",function(req,res,next){   // http://localhost:12138/sendcmd?c
 		if(err){
 			res.send('faill');
 		}else{
-			res.send({'yourcmd:':req.query.cmd,ok:true});
+			res.send({'yourcmd:':req.query.cmd,ok:true,"timestamp":Date.parse(new Date())});
 		}
 	})
 });
