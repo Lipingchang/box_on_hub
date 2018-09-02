@@ -1,9 +1,9 @@
 var app = new Vue({
 	el:"#app",
 	data: {
-		a: 1,
-		message:4,
-		k:3
+		dht22_1_info:,
+		dht11_1_info,
+		dht11_2_info,
 	}
 });
 
@@ -13,5 +13,4 @@ axios({
   responseType:'json'
 })
 .then(function(response) {
-    console.log(response.data)
-  });
+    console.log(response.data)});
