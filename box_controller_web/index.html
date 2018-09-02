@@ -60,7 +60,11 @@
 			>
 			{{ button_text }}
 		</button>
-		<span class="reconnect">reconnecting...({{reconnect_time}}s)</span>
+		<span 
+		v-if="isVisiable"
+		class="reconnect">
+			reconnecting...({{reconnect_time}}s)
+		</span>
 
 	</div>
 <script type="text/javascript" src="index.js"></script>

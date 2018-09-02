@@ -68,9 +68,12 @@ var controlapp = new Vue({
 	el:"#controlapp",
 	data: {
 		isFanOn:false,
-		isConnect:false,
+		isConnect:true,
 		isChanging:false,
-		reconnect_time:10
+		reconnect_time:5,
+		isVisiable:false,
+		reconnectInterval:false,
+		reconnectIntervalNumber:0
 	},
 	computed: {	     
 	    button_text:function(){
@@ -87,6 +90,22 @@ var controlapp = new Vue({
 	    	let isFanOn = this.isFanOn;
 	    	return {"button-rounded":true,"button":true,"button-action":isFanOn,"button-caution":isFanOn==false,"button-glow":isFanOn}
 	    }
+	},
+	watch:{
+		isConnect:function(pre,after){
+			console.log('isConnect changed!!j');
+			let that = this;
+			if( this.isConnect ){
+				clearInterval(this.reconnectIntervalNumber);
+				clearInterval(this.reconnectIntervalTimeNumber);
+				this.isVisiable = false;
+			}else{
+
+				this.isVisiable = true;
+				this.reconnectIntervalNumber = setInterval(this.reconnectLoop,5000);
+				this.reconnectIntervalTimeNumber = setInterval(function(){that.reconnect_time=that.reconnect_time-1;},1000);
+			}
+		}
 	},
 	mounted: function () { 
 		this.getFan1State();
@@ -140,12 +159,11 @@ var controlapp = new Vue({
 			})
 			.catch(function(err){
 				console.log('err',err);
-				that.reconnectInterval();
+				that.reconnectInterval = true;
 			})
 		},
-		reconnectInterval:function(){
-			let that = this;
-
+		reconnectLoop:function(){
+			this.getFan1State();
 		}
 	}
 });
