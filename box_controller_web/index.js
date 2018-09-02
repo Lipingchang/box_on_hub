@@ -100,7 +100,7 @@ var controlapp = new Vue({
 				clearInterval(this.reconnectIntervalTimeNumber);
 				this.isVisiable = false;
 			}else{
-
+that.reconnect_time = 5;
 				this.isVisiable = true;
 				this.reconnectIntervalNumber = setInterval(this.reconnectLoop,5000);
 				this.reconnectIntervalTimeNumber = setInterval(function(){that.reconnect_time=that.reconnect_time-1;},1000);
