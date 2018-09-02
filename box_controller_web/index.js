@@ -17,7 +17,7 @@ var app = new Vue({
         date: ''
 	},
 	mounted: function () { 
-		setInterval(this.getdailybuffer, 1000);
+		setInterval(this.getdailybuffer, 2000);
 	},
 	methods:{
 		getdailybuffer:function(){

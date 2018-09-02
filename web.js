@@ -115,14 +115,10 @@ app.all('/*', function(req, res, next) {
 
 
 
-app.get("/state_buff",function(req,res,next){
+app.get("/daily_buff",function(req,res,next){
 	res.send(state_buff);
 });
-app.get("/daily_buff2",function(req,res,next){
-  res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    console.log('set daily_head');
+app.get("/state_buff",function(req,res,next){
 	res.send(daily_temp_buff);
 });
 app.get("/sendcmd",function(req,res,next){   // http://localhost:12138/sendcmd?cmd=hhh
