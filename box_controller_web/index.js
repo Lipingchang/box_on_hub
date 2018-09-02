@@ -24,7 +24,7 @@ var app = new Vue({
 			let that = this;
 			axios({
 			  method:'get',
-			  url:'http://10.66.4.189:12138/daily_buff',
+			  url:'http://10.66.4.189:12138/state_buff',
 			  responseType:'json'
 			})
 			.then(function(response) {
@@ -106,7 +106,7 @@ var controlapp = new Vue({
 			    cmdstamp = parseInt(response.data.timestamp);
 			    return axios({
 			    	method:'get',
-			    	url:'http://10.66.4.189:12138/state_buff',
+			    	url:'http://10.66.4.189:12138/daily_buff',
 			    	responseType:'json'
 			    })
 			})
