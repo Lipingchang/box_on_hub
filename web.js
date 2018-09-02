@@ -99,6 +99,7 @@ client.on('message', function (topic, message) {
 // 	})
 // });
 var path = require('path');
+app.use(express.static( path.join(__dirname,'box_controller_web')));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -124,7 +125,6 @@ app.get("/sendcmd",function(req,res,next){   // http://localhost:12138/sendcmd?c
 		}
 	})
 });
-app.use(express.static( path.join(__dirname,'box_controller_web')));
 
 app.listen(12138, function() {
  console.log('App listening at port 12138;');
