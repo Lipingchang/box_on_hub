@@ -101,6 +101,7 @@ client.on('message', function (topic, message) {
 var path = require('path');
 //设置跨域访问
 app.all('*', function(req, res, next) {
+    console.log('set header!!');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
