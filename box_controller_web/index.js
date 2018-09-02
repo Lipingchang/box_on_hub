@@ -125,7 +125,7 @@ var controlapp = new Vue({
 			    cmdstamp = parseInt(response.data.timestamp);
 			    return axios({
 			    	method:'get',
-			    	url:'http://10.66.4.189:12138/daily_buff',
+			    	url:'http://10.66.4.189:12138/daily2_buff',
 			    	responseType:'json'
 			    })
 			})

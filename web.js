@@ -115,7 +115,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get("/daily_buff",function(req,res,next){
+app.get("/daily2_buff",function(req,res,next){
 	res.send(state_buff);
 });
 app.get("/state_buff",function(req,res,next){
