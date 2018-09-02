@@ -100,6 +100,11 @@ client.on('message', function (topic, message) {
 // });
 var path = require('path');
 //设置跨域访问
+
+
+
+app.use(express.static( path.join(__dirname,'box_controller_web')));
+
 app.all('*', function(req, res, next) {
     console.log('set header!!');
     res.header("Access-Control-Allow-Origin", "*");
@@ -109,11 +114,6 @@ app.all('*', function(req, res, next) {
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
 });
-
-
-app.use(express.static( path.join(__dirname,'box_controller_web')));
-
-
 
 app.get("/daily_buff",function(req,res,next){
 	res.send(state_buff);
