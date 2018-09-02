@@ -98,7 +98,7 @@ client.on('message', function (topic, message) {
 // 		}
 // 	})
 // });
-
+var path = require('path');
 app.use("*",express.static( path.join(__dirname,'box_controller_web')));
 
 app.all('*', function(req, res, next) {
