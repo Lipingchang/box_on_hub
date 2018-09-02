@@ -3,28 +3,63 @@
 
 <head>
 	<title></title>
-	
+
+<style type="text/css">
+
+.time {
+  background: #0f3854;
+  display: inline-block;
+  font-family: 'Share Tech Mono', monospace;  
+  color: #daf6ff;
+  text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+  letter-spacing: 0.01em;
+  font-size: 1em;
+  padding: 0em 1em 0em 1em;
+  height: 2em;
+  text-align: center;
+  line-height: 0em;
+  margin: 0em;
+}
+.vueapp {
+	margin: 1em;
+}
+
+</style>
+<link rel="stylesheet" type="text/css" href="button.css">
 <script type="text/javascript" src="vue.js"></script>
 <script type="text/javascript" src="axios.js"></script>
 </head>
 <body>
-	<div id="app">
-		<ul>
-			<li>
-				<b>dht22_1:</b>{{dht22_1_info}}
-			</li>
-		</ul>
-		<ul>
-			<li>
-				<b>dht11_1:</b>{{dht11_1_info}}
-			</li>
-		</ul>
-		<ul>
-			<li>
-				<b>dht11_2:</b>{{dht11_2_info}}
-			</li>
-		</ul>
-		<button v-on:click="getdailybuffer()" >button</button>
+ 
+	<div id="app" class="vueapp">
+		<sensor-show
+			v-for="sensor in sensor_data"
+			v-bind:sensorname="sensor.name"
+			v-bind:tmp="sensor.tmp"
+			v-bind:hum="sensor.hum"
+			v-bind:key="sensor.id"
+			class="sensorshow">
+		</sensor-show>
+		<div class="time">
+			<p>LAST UPDATE:{{daily_buff_fresh_time}}</p>
+		</div>
+		<br>
+		<div class="time">
+	    	<p>CURRENT:&nbsp;&nbsp;&nbsp;&nbsp;{{ time }}</p>
+		</div>
+	</div>
+
+
+
+	<div id="controlapp" class="vueapp">
+		<span>fan:</span>
+		<button 
+			v-bind:class="buttoncolor"
+			v-bind:disabled="isBtnDisabled"
+			v-on:click="changefanstate()"
+			>
+			{{ button_text }}
+		</button>
 
 	</div>
 <script type="text/javascript" src="index.js"></script>
