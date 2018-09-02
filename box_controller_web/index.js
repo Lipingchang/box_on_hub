@@ -69,7 +69,8 @@ var controlapp = new Vue({
 	data: {
 		isFanOn:false,
 		isConnect:false,
-		isChanging:false
+		isChanging:false,
+		reconnect_time:10
 	},
 	computed: {	     
 	    button_text:function(){
@@ -138,8 +139,13 @@ var controlapp = new Vue({
 				that.getFan1State()
 			})
 			.catch(function(err){
-
+				console.log('err',err);
+				that.reconnectInterval();
 			})
+		},
+		reconnectInterval:function(){
+			let that = this;
+
 		}
 	}
 });
